@@ -10,7 +10,6 @@
 
       <ul class="nav col-md-4 justify-content-end">
         <li class="nav-item"><router-link class="nav-link px-2 text-body-secondary" to="/">Home</router-link></li>
-        <li class="nav-item"><router-link class="nav-link px-2 text-body-secondary" to="/games">Games</router-link></li>
         <li class="nav-item"><router-link class="nav-link px-2 text-body-secondary" to="/categories">Categories</router-link></li>
         <li class="nav-item"><router-link class="nav-link px-2 text-body-secondary" to="/platforms">Platforms</router-link></li>
         <li class="nav-item"><router-link class="nav-link px-2 text-body-secondary" to="/dashboard">Dashboard</router-link></li>

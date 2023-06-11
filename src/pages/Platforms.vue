@@ -2,10 +2,14 @@
 
 <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col my-2">
                 <h1>Platforms</h1>
+                <p>Here you can find all game platforms.</p>
             </div>
         </div>
+
+        <hr>
+
         <div class="row">
             <div class="col">
                 <ul>

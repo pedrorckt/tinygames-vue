@@ -3,18 +3,30 @@
     <div class="d-flex align-items-center py-4">
         <main class="form-signin w-100 m-auto">
             <form @submit.prevent="login()">
+                
                 <img class="rounded mb-4" src="https://storage.googleapis.com/tinygames/images/tinygames.svg?a" alt="TinyGames" width="128" height="128">
+                
                 <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                
                 <div class="form-floating">
                     <input type="email" class="form-control" id="email" v-model="email" placeholder="name@example.com">
                     <label for="floatingInput">Email address</label>
                 </div>
+                
                 <div class="form-floating">
                     <input type="password" class="form-control" id="password" v-model="password" placeholder="Password">
                     <label for="floatingPassword">Password</label>
                 </div>
+                
                 <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-                <p class="mt-5 mb-3 text-body-secondary">&copy; 2023</p>
+
+                <p class="text-danger my-2" v-if="error">{{ error }}</p>
+
+                <div class="my-3">
+                    <!-- <router-link to="/forgot-password">Forgot password?</router-link> -->
+                    <p class="text-body-secondary">Don't have an account? <router-link to="/register">Register</router-link></p>
+                </div>
+
             </form>
         </main>
     </div>
@@ -32,6 +44,7 @@ export default {
         return {
             email: '',
             password: '',
+            error: '',
         }
     },
     methods: {
@@ -41,9 +54,11 @@ export default {
                 email: this.email,
                 password: this.password,
             }, {withCredentials: true}).then(response => {
-                $router.push('/dashboard');
+                sessionStorage.setItem("auth", "logged");
+                // this.$router.push('/dashboard');
+                window.location.href = '/dashboard';
             }).catch(error => {
-                console.log(error.response);
+                this.error = error.response.data?.message;
             });
         }
     }

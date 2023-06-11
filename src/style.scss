@@ -4,3 +4,7 @@ $primary: #2DD2AB;
 $secondary: #84cc41;
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+.btn-primary {
+    color: white;
+}

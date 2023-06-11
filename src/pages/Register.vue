@@ -3,8 +3,11 @@
     <div class="d-flex align-items-center py-4">
         <main class="form-register w-100 m-auto">
             <form @submit.prevent="register">
+                
                 <img class="rounded mb-4" src="https://storage.googleapis.com/tinygames/images/tinygames.svg?a" alt="TinyGames" width="128" height="128">
+                
                 <h1 class="h3 mb-3 fw-normal">Create your account</h1>
+                
                 <div class="mb-3">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="name" v-model="name" placeholder="John Doe">
@@ -23,13 +26,15 @@
                         <label for="password_confirmation">Password confirmation</label>
                     </div>
                 </div>
+
                 <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
+
+                <p class="text-danger my-2" v-if="error">{{ error }}</p>
+
                 <div>
-                    <router-link to="/forgot-password">Forgot password?</router-link>
-                    <p class="mt-3 mb-3 text-body-secondary">Already have an account? <router-link to="/login">Login</router-link></p>
+                    <p class="my-2 text-body-secondary">Already have an account? <router-link to="/login">Login</router-link></p>
                 </div>
-                
-                <p class="mt-5 mb-3 text-body-secondary">&copy; 2023</p>
+
             </form>
         </main>
     </div>
@@ -49,6 +54,7 @@ export default {
             email: '',
             password: '',
             password_confirmation: '',
+            error: '',
         }
     },
     methods: {
@@ -59,9 +65,10 @@ export default {
                 password: this.password,
                 password_confirmation: this.password_confirmation,
             }, {withCredentials: true}).then(response => {
-                $router.push('/dashboard');
+                // this.$router.push('/dashboard');
+                window.location.href = '/dashboard';
             }).catch(error => {
-                console.log(error.response.data);
+                this.error = error.response.data?.message;
             });
         }
     }

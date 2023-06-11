@@ -2,10 +2,14 @@
 
 <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col my-2">
                 <h1>Platform: {{ platform.name }}</h1>
+                <p>Games in this platform:</p>
             </div>
         </div>
+
+        <hr>
+
         <div class="row">
             <div class="col">
                 <ul>
@@ -16,8 +20,8 @@
             </div>
         </div>
 
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
+        <nav>
+            <ul class="pagination my-3 justify-content-center">
                 <li class="page-item" :class="{'disabled': page === 1}">
                     <button class="page-link" @click.prevent="firstPage()" :disabled="page === 1">First</button>
                 </li>

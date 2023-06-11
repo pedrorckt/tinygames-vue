@@ -2,11 +2,16 @@
 
     <div class="container">
         <div class="row">
-            <div class="col my-3">
+            <div class="col-6 my-2">
                 <h1>My collections</h1>
-                <hr>
+            </div>
+            <div class="col-6 d-flex align-items-end justify-content-end my-2">
+                <router-link class="btn btn-primary" to="/collections/create">Create collection</router-link>
             </div>
         </div>
+
+        <hr>
+
         <div class="row" v-for="collection in collections" :key="collection.id">
             <div class="col-12 mb-1">
                 <h3>#{{ collection.id }} - {{ collection.name }}</h3>
@@ -26,7 +31,11 @@
                     </div>
                 </div>
             </div>
+            
         </div>
+
+        <p class="my-3" v-if="!collections.length">You don't have any collections yet.</p>
+
     </div>
 
 </template>

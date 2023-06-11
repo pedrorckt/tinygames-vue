@@ -2,11 +2,14 @@
 
 <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col my-2">
                 <h1>Category: {{ category.name }}</h1>
                 <p>Games in this category:</p>
             </div>
         </div>
+
+        <hr>
+
         <div class="row mb-5">
             <div class="col-lg-6 mb-2" v-for="game in category.games?.data" :key="game.id">
                 <router-link :to="{ name: 'game', params: { id: game.id } }">#{{ game.id }} - {{ game.name }}</router-link>
@@ -14,8 +17,8 @@
             </div>
         </div>
 
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
+        <nav>
+            <ul class="pagination my-3 justify-content-center">
                 <li class="page-item" :class="{'disabled': page === 1}">
                     <button class="page-link" @click.prevent="firstPage()" :disabled="page === 1">First</button>
                 </li>
