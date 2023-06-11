@@ -6,7 +6,7 @@
                 <h1>My collections</h1>
             </div>
             <div class="col-6 d-flex align-items-end justify-content-end my-2">
-                <router-link class="btn btn-primary" to="/collections/create">Create collection</router-link>
+                <router-link class="btn btn-primary" to="/collection">Create collection</router-link>
             </div>
         </div>
 

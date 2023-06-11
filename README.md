@@ -1,7 +1,32 @@
-# Vue 3 + Vite
+# TinyGames - Vue 3 + Vite front-end
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Manage your game collection with this Vue+Vite front-end.
 
-## Recommended IDE Setup
+How to run?
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+    npm i
+    npm run dev
+
+You can now access the site at http://localhost:3000
+
+## Some screenshots
+
+Home 
+
+![home](https://storage.googleapis.com/tinygames/screenshots/tinygames-home.png)
+
+Register
+
+![register](https://storage.googleapis.com/tinygames/screenshots/tinygames-register.png)
+
+Login
+
+![login](https://storage.googleapis.com/tinygames/screenshots/tinygames-login.png)
+
+Game
+
+![register](https://storage.googleapis.com/tinygames/screenshots/tinygames-game.png)
+
+Collections
+
+![register](https://storage.googleapis.com/tinygames/screenshots/tinygames-collections.png)
