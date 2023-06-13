@@ -10,92 +10,97 @@
 
         <hr>
 
-        <div class="row">
-            <div class="col-md-6 col-lg-3 mb-3" v-for="game in games" :key="game.id">
-                <div class="card h-100">
-                    <img :src="game.cover" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title"><router-link :to="'/games/' + game.id">{{ game.name }}</router-link></h5>
-                        <p class="card-text">{{ game.description }}</p>
-                        <p class="card-text mb-0">
-                            <small class="text-muted">
-                                Categories: <span v-for="(category, i) in game.categories">{{ (i != 0) ? ',' : '' }} <router-link :to="'/categories/' + category.id" >{{ category.name }}</router-link></span>
-                            </small>
-                        </p>
-                        <p class="card-text">
-                            <small class="text-muted">
-                                Platforms: <span v-for="(platform, i) in game.platforms">{{ (i != 0) ? ',' : '' }} <router-link :to="'/platforms/' + platform.id" >{{ platform.name }}</router-link></span>
-                            </small>
-                        </p>
+        <div class="text-bg-light rounded p-3 mb-3">
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating">
+                        <input type="number" class="form-control form-control-sm" id="startYear" v-model="startYear" placeholder="1999">
+                        <label for="startYear">From year:</label>
                     </div>
                 </div>
+                <div class="col">
+                    <div class="form-floating">
+                        <input type="number" class="form-control form-control-sm" id="endYear" v-model="endYear" placeholder="2020">
+                        <label for="endYear">Until year:</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating">
+                        <input type="number" class="form-control form-control-sm" id="minScore" v-model="minScore" placeholder="1999">
+                        <label for="minScore">Min score:</label>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-center justify-content-end">
+                    <button class="btn btn-primary" @click="filter"><i class="bi bi-search"></i> Filter</button>
+                </div>
+            </div>
+
+        </div>
+        
+
+        <div class="row my-2">
+            <div class="col-md-6 col-lg-3 mb-3" v-for="game in games" :key="game.id">
+                <Game :game="game"></Game>
             </div>
         </div>
-    </div>
 
-    <nav>
-        <ul class="pagination my-3 justify-content-center">
-            <li class="page-item" :class="{'disabled': page === 1}">
-                <button class="page-link" @click.prevent="firstPage()" :disabled="page === 1">First</button>
-            </li>
-            <li class="page-item" v-if="page > 3">
-                <span class="page-link">[...]</span>
-            </li>
-            <li class="page-item" v-if="page > 2">
-                <button class="page-link" @click.prevent="page-=2">{{ page - 2 }}</button>
-            </li>
-            <li class="page-item" v-if="page > 1">
-                <button class="page-link" @click.prevent="page-=1">{{ page - 1 }}</button>
-            </li>
-            <li class="page-item disabled">
-                <button class="page-link " disabled="disabled">{{ page }}</button>
-            </li>
-            <li class="page-item" v-if="page < last_page">
-                <button class="page-link" @click.prevent="page+=1">{{ page + 1 }}</button>
-            </li>
-            <li class="page-item" v-if="page < last_page - 1">
-                <button class="page-link" @click.prevent="page+=2">{{ page + 2 }}</button>
-            </li>
-            <li class="page-item" v-if="page < last_page - 2">
-                <span class="page-link">[...]</span>
-            </li>
-            <li class="page-item" :class="{'disabled': page >= last_page}">
-                <button class="page-link" @click.prevent="lastPage()" :disabled="page >= last_page">Last</button>
-            </li>
-        </ul>
-    </nav>
+        <Pagination :page="page" :last_page="last_page" :total="total" @pagechanged="pagechanged"></Pagination>
+
+    </div>
 
 </template>
 
 <script>
 import axios from 'axios';
+import Game from '../components/Game.vue';
+import Pagination from '../components/Pagination.vue';
 
 export default {
     name: 'Home',
     components: {
+        Game,
+        Pagination,
     },
     data() {
         return {
             games: [],
             page: 1,
             last_page: 1,
+            total: 0,
+            startYear: 1999,
+            endYear: 2020,
+            minScore: 50,
+            filtered: false,
         }
     },
     methods: {
+
         getGames() {
-            axios.get('http://localhost:8000/api/games?page=' + this.page).then(response => {
+            let url = 'http://localhost:8000/api/games/search';
+            url += '?page=' + this.page;
+            if (this.filtered) {
+                url += '&startYear=' + this.startYear + '&endYear=' + this.endYear + '&minScore=' + this.minScore;
+            } 
+            axios.get(url).then(response => {
                 this.games = response.data.data;
                 this.last_page = response.data.last_page;
+                this.total = response.data.total;
             }).catch(error => {
                 console.log(error.response.data);
             });
         },
-        firstPage() {
+
+        pagechanged(page) {
+            this.page = page;
+        },
+
+        filter() {
+            this.filtered = true;
             this.page = 1;
-        },
-        lastPage() {
-            this.page = this.last_page;
-        },
+            this.getGames();
+        }
+
     },
     mounted() {
         this.getGames();

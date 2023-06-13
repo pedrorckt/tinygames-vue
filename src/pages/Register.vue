@@ -8,7 +8,7 @@
                 
                 <h1 class="h3 mb-3 fw-normal">Create your account</h1>
                 
-                <div class="mb-3">
+                <div class="mb-2">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="name" v-model="name" placeholder="John Doe">
                         <label for="name">Name</label>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
+                <button class="btn btn-primary w-100 py-2" type="submit"><i class="bi bi-door-closed"></i> Register</button>
 
                 <p class="text-danger my-2" v-if="error">{{ error }}</p>
 

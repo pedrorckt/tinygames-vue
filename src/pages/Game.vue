@@ -1,12 +1,12 @@
 <template>
 
-<div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-lg-4 col-xl-3">
                 <img :src="game.cover" class="img-fluid rounded" alt="">
             </div>
             <div class="col-lg-8 col-xl-9 my-2">
-                <h1>Game: {{ game.name }}</h1>
+                <h1>Game: {{ game.name }} ({{ game.score }})</h1>
                 <p><strong>Year:</strong> {{ game.year }}</p>
                 <p> <strong>Description:</strong> {{ game.description }}</p>
                 <p class="mb-0">
@@ -42,7 +42,13 @@
             </div>
         </div>
 
-        <hr v-if="auth">
+        <div class="row" v-else>
+            <div class="col-12">
+                <p class="text-muted mb-0">You must be logged in to add games to your collections. <router-link to="/login">Login now!</router-link></p>
+            </div>
+        </div>
+
+        <hr>
 
         <div class="row">
             <div class="col-12 my-2">
@@ -120,7 +126,7 @@ export default {
                 game_id: this.$route.params.id,
             }
             axios.post('http://localhost:8000/api/collections/' + this.current + '/add', data, {withCredentials: true}).then(response => {
-                console.log(response.data);
+                this.$router.push('/dashboard');
             }).catch(error => {
                 console.log(error.response?.data);
             });

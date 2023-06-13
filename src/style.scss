@@ -4,7 +4,8 @@ $primary: #2DD2AB;
 $secondary: #84cc41;
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.scss";
 
-.btn-primary {
+.btn-primary, .btn-primary:hover, .btn-outline-primary:hover {
     color: white;
 }

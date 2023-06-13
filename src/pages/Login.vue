@@ -6,7 +6,7 @@
                 
                 <img class="rounded mb-4" src="https://storage.googleapis.com/tinygames/images/tinygames.svg?a" alt="TinyGames" width="128" height="128">
                 
-                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                <h1 class="h3 mb-3 fw-normal">Please log</h1>
                 
                 <div class="form-floating">
                     <input type="email" class="form-control" id="email" v-model="email" placeholder="name@example.com">
@@ -18,11 +18,11 @@
                     <label for="floatingPassword">Password</label>
                 </div>
                 
-                <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+                <button class="btn btn-primary w-100 py-2" type="submit"><i class="bi bi-box-arrow-in-right"></i> Login</button>
 
                 <p class="text-danger my-2" v-if="error">{{ error }}</p>
 
-                <div class="my-3">
+                <div class="my-2">
                     <!-- <router-link to="/forgot-password">Forgot password?</router-link> -->
                     <p class="text-body-secondary">Don't have an account? <router-link to="/register">Register</router-link></p>
                 </div>

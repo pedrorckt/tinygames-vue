@@ -31,8 +31,8 @@
         </div>
 
         <div class="text-end" v-else>
-          <router-link class="btn btn-outline-primary me-2" to="/login">Login</router-link>
-          <router-link class="btn btn-primary" to="/register">Sign-up</router-link>
+          <router-link class="btn btn-outline-primary me-2" to="/login"><i class="bi bi-box-arrow-in-right"></i> Login</router-link>
+          <router-link class="btn btn-primary" to="/register"><i class="bi bi-door-closed"></i> Sign-up</router-link>
         </div>
 
       </div>

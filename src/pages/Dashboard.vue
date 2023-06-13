@@ -6,30 +6,21 @@
                 <h1>My collections</h1>
             </div>
             <div class="col-6 d-flex align-items-end justify-content-end my-2">
-                <router-link class="btn btn-primary" to="/collection">Create collection</router-link>
+                <router-link class="btn btn-primary" to="/collection"><i class="bi bi-folder-plus"></i> Create collection</router-link>
             </div>
         </div>
 
         <hr>
 
-        <div class="row" v-for="collection in collections" :key="collection.id">
-            <div class="col-12 mb-1">
+        <div class="row mb-2" v-for="collection in collections" :key="collection.id">
+            <div class="col-8">
                 <h3>#{{ collection.id }} - {{ collection.name }}</h3>
             </div>
+            <div class="col-4 d-flex justify-content-end mb-2">
+                <button class="btn btn-outline-danger" @click="deleteCollection(collection.id)"><i class="bi-trash"></i> Delete</button>
+            </div>
             <div class="col-3 mb-3" v-for="game in collection.games" :key="game.id">
-                <div class="card h-100">
-                    <img :src="game.cover" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ game.name }}</h5>
-                        <p class="card-text">{{ game.description }}</p>
-                        <p class="card-text">
-                            <small class="text-muted">
-                                Platforms: {{ game.platforms.map(p => p.name).join(", ") }} &mdash; 
-                                Categories: {{ game.categories.map(c => c.name).join(", ") }} 
-                            </small>
-                        </p>
-                    </div>
-                </div>
+                <Game :game="game" @removeFromCollection="removeFromCollection"></Game>
             </div>
             
         </div>
@@ -42,10 +33,12 @@
 
 <script>
 import axios from 'axios';
+import Game from '../components/Game.vue';
 
 export default {
     name: 'Dashboard',
     components: {
+        Game,
     },
     data() {
         return {
@@ -54,15 +47,34 @@ export default {
         }
     },
     methods: {
+
         getMe() {
             axios.get('http://localhost:8000/api/me', {withCredentials: true}).then(response => {
-                console.log(response.data);
                 this.user = response.data;
                 this.collections = response.data.collections.data;
             }).catch(error => {
                 console.log(error.response.data);
             });
-        }
+        },
+
+        deleteCollection(id) {
+            if (!confirm('Are you sure you want to delete this collection?')) return;
+            axios.delete('http://localhost:8000/api/collections/' + id, {withCredentials: true}).then(response => {
+                this.getMe();
+            }).catch(error => {
+                console.log(error.response.data);
+            });
+        },
+
+        removeFromCollection(pivot) {
+            if (!confirm('Are you sure you want to remove this game from this collection?')) return;
+            axios.delete('http://localhost:8000/api/collections/' + pivot.collection_id + '/games/' + pivot.game_id, {withCredentials: true}).then(response => {
+                this.getMe();
+            }).catch(error => {
+                console.log(error.response.data);
+            });
+        },
+
     },
     mounted() {
         this.getMe();
