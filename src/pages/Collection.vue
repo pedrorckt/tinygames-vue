@@ -36,7 +36,7 @@ export default {
     },
     methods: {
         create() {
-            axios.post('http://localhost:8000/api/collections', {
+            axios.post('https://api.tinygames.rckt.com.br/api/collections', {
                 name: this.name,
             }, {withCredentials: true}).then(response => {
                 this.$router.push('/dashboard');

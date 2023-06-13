@@ -73,7 +73,7 @@ export default {
     },
     methods: {
         getCategories() {
-            axios.get('http://localhost:8000/api/categories?page=' + this.page).then(response => {
+            axios.get('https://api.tinygames.rckt.com.br/api/categories?page=' + this.page).then(response => {
                 this.categories = response.data.data;
                 this.last_page = response.data.last_page;
             }).catch(error => {

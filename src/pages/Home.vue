@@ -13,25 +13,25 @@
         <div class="text-bg-light rounded p-3 mb-3">
 
             <div class="row">
-                <div class="col">
+                <div class="col-6 col-md-3">
                     <div class="form-floating">
                         <input type="number" class="form-control form-control-sm" id="startYear" v-model="startYear" placeholder="1999">
                         <label for="startYear">From year:</label>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-6 col-md-3">
                     <div class="form-floating">
                         <input type="number" class="form-control form-control-sm" id="endYear" v-model="endYear" placeholder="2020">
                         <label for="endYear">Until year:</label>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-6 col-md-3">
                     <div class="form-floating">
                         <input type="number" class="form-control form-control-sm" id="minScore" v-model="minScore" placeholder="1999">
                         <label for="minScore">Min score:</label>
                     </div>
                 </div>
-                <div class="col d-flex align-items-center justify-content-end">
+                <div class="col-6 col-md-3 d-flex align-items-center justify-content-end">
                     <button class="btn btn-primary" @click="filter"><i class="bi bi-search"></i> Filter</button>
                 </div>
             </div>
@@ -77,7 +77,7 @@ export default {
     methods: {
 
         getGames() {
-            let url = 'http://localhost:8000/api/games/search';
+            let url = 'https://api.tinygames.rckt.com.br/api/games/search';
             url += '?page=' + this.page;
             if (this.filtered) {
                 url += '&startYear=' + this.startYear + '&endYear=' + this.endYear + '&minScore=' + this.minScore;

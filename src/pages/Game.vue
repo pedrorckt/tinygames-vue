@@ -93,7 +93,7 @@ export default {
     data() {
         return {
             game: {},
-            auth: !!sessionStorage.getItem("auth"),
+            auth: !!localStorage.getItem("auth"),
             collections: [],
             current: null,
         }
@@ -101,7 +101,7 @@ export default {
     methods: {
 
         getPlatforms() {
-            axios.get('http://localhost:8000/api/games/' + this.$route.params.id).then(response => {
+            axios.get('https://api.tinygames.rckt.com.br/api/games/' + this.$route.params.id).then(response => {
                 this.game = response.data;
                 setTimeout(() => {
                     this.initCarousel();
@@ -112,7 +112,7 @@ export default {
         },
 
         getCollections() {
-            axios.get('http://localhost:8000/api/collections', {withCredentials: true}).then(response => {
+            axios.get('https://api.tinygames.rckt.com.br/api/collections', {withCredentials: true}).then(response => {
                 console.log(response.data);
                 this.collections = response.data.collections.data;
                 this.current = this.collections[0]?.id;
@@ -125,7 +125,7 @@ export default {
             const data = {
                 game_id: this.$route.params.id,
             }
-            axios.post('http://localhost:8000/api/collections/' + this.current + '/add', data, {withCredentials: true}).then(response => {
+            axios.post('https://api.tinygames.rckt.com.br/api/collections/' + this.current + '/add', data, {withCredentials: true}).then(response => {
                 this.$router.push('/dashboard');
             }).catch(error => {
                 console.log(error.response?.data);
@@ -140,7 +140,7 @@ export default {
     },
     mounted() {
         this.getPlatforms();
-        if (sessionStorage.getItem("auth")) {
+        if (localStorage.getItem("auth")) {
             this.getCollections();
         }
     }

@@ -59,14 +59,13 @@ export default {
     },
     methods: {
         register() {
-            axios.post('http://localhost:8000/register', {
+            axios.post('https://api.tinygames.rckt.com.br/register', {
                 name: this.name,
                 email: this.email,
                 password: this.password,
                 password_confirmation: this.password_confirmation,
             }, {withCredentials: true}).then(response => {
-                // this.$router.push('/dashboard');
-                window.location.href = '/dashboard';
+                window.location.href = '/#/dashboard';
             }).catch(error => {
                 this.error = error.response.data?.message;
             });

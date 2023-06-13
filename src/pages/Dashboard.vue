@@ -19,7 +19,7 @@
             <div class="col-4 d-flex justify-content-end mb-2">
                 <button class="btn btn-outline-danger" @click="deleteCollection(collection.id)"><i class="bi-trash"></i> Delete</button>
             </div>
-            <div class="col-3 mb-3" v-for="game in collection.games" :key="game.id">
+            <div class="col-lg-3 mb-3" v-for="game in collection.games" :key="game.id">
                 <Game :game="game" @removeFromCollection="removeFromCollection"></Game>
             </div>
             
@@ -49,7 +49,7 @@ export default {
     methods: {
 
         getMe() {
-            axios.get('http://localhost:8000/api/me', {withCredentials: true}).then(response => {
+            axios.get('https://api.tinygames.rckt.com.br/api/me', {withCredentials: true}).then(response => {
                 this.user = response.data;
                 this.collections = response.data.collections.data;
             }).catch(error => {
@@ -59,7 +59,7 @@ export default {
 
         deleteCollection(id) {
             if (!confirm('Are you sure you want to delete this collection?')) return;
-            axios.delete('http://localhost:8000/api/collections/' + id, {withCredentials: true}).then(response => {
+            axios.delete('https://api.tinygames.rckt.com.br/api/collections/' + id, {withCredentials: true}).then(response => {
                 this.getMe();
             }).catch(error => {
                 console.log(error.response.data);
@@ -68,7 +68,7 @@ export default {
 
         removeFromCollection(pivot) {
             if (!confirm('Are you sure you want to remove this game from this collection?')) return;
-            axios.delete('http://localhost:8000/api/collections/' + pivot.collection_id + '/games/' + pivot.game_id, {withCredentials: true}).then(response => {
+            axios.delete('https://api.tinygames.rckt.com.br/api/collections/' + pivot.collection_id + '/games/' + pivot.game_id, {withCredentials: true}).then(response => {
                 this.getMe();
             }).catch(error => {
                 console.log(error.response.data);

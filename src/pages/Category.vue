@@ -44,7 +44,7 @@ export default {
     },
     methods: {
         getCategory() {
-            axios.get('http://localhost:8000/api/categories/' + this.$route.params.id + '?page=' + this.page).then(response => {
+            axios.get('https://api.tinygames.rckt.com.br/api/categories/' + this.$route.params.id + '?page=' + this.page).then(response => {
                 this.category = response.data;
                 this.games = response.data.games?.data;
                 this.last_page = response.data.games?.last_page || 1;

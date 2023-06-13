@@ -37,7 +37,7 @@ export default {
     },
     methods: {
         getPlatforms() {
-            axios.get('http://localhost:8000/api/platforms').then(response => {
+            axios.get('https://api.tinygames.rckt.com.br/api/platforms').then(response => {
                 this.platforms = response.data.data;
             }).catch(error => {
                 console.log(error.response.data);

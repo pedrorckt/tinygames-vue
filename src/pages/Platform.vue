@@ -44,7 +44,7 @@ export default {
     },
     methods: {
         getPlatform() {
-            axios.get('http://localhost:8000/api/platforms/' + this.$route.params.id + '?page=' + this.page).then(response => {
+            axios.get('https://api.tinygames.rckt.com.br/api/platforms/' + this.$route.params.id + '?page=' + this.page).then(response => {
                 this.platform = response.data;
                 this.games = response.data.games?.data || [];
                 this.last_page = response.data.games?.last_page;

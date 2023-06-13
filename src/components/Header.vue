@@ -48,15 +48,15 @@ export default {
   name: 'Header',
   data() {
     return {
-      auth: !!sessionStorage.getItem('auth')
+      auth: (localStorage.getItem('auth') == 'logged')
     }
   },
   methods: {
     logout() {
-      axios.post('http://localhost:8000/logout', null, {withCredentials: true}).then(response => {
+      axios.post('https://api.tinygames.rckt.com.br/logout', null, {withCredentials: true}).then(response => {
           if (response.status === 302 || 401 || 404) {
-            sessionStorage.removeItem('auth');
-            window.location.href = '/dashboard';
+            localStorage.removeItem('auth');
+            window.location.href = '/#/dashboard';
           }
         }).catch(error => {
           console.log(error);

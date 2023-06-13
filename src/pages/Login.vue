@@ -49,14 +49,13 @@ export default {
     },
     methods: {
         login() {
-            axios.get('http://localhost:8000/sanctum/csrf-cookie');
-            axios.post('http://localhost:8000/login', {
+            axios.get('https://api.tinygames.rckt.com.br/sanctum/csrf-cookie');
+            axios.post('https://api.tinygames.rckt.com.br/login', {
                 email: this.email,
                 password: this.password,
             }, {withCredentials: true}).then(response => {
-                sessionStorage.setItem("auth", "logged");
-                // this.$router.push('/dashboard');
-                window.location.href = '/dashboard';
+                localStorage.setItem("auth", "logged");
+                window.location.href = '/#/dashboard';
             }).catch(error => {
                 this.error = error.response.data?.message;
             });
